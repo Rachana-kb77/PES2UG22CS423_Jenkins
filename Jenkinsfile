@@ -4,14 +4,27 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                script {
+                    checkout([$class: 'GitSCM', 
+                        branches: [[name: '*/main']], 
+                        userRemoteConfigs: [[url: 'https://github.com/Rachana-kb77/PES2UG22CS423_Jenkins']]
+                    ])
+                }
             }
         }
-        
+
+        stage('List Files') {
+            steps {
+                script {
+                    sh 'ls -al main'
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
-                    sh 'g++ -o PES2UG22CS423-1 hello.cpp'
+                    sh 'g++ -o PES2UG22CS423-1 main/hello.cpp'
                 }
             }
         }
