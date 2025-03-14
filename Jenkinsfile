@@ -10,7 +10,7 @@ pipeline {
 
 stage('Test') {
     steps {
-        sh './main/hello_exec'  // Change path here
+        sh './main/non_existent_exec'  // Change path here
     }
 }
 
